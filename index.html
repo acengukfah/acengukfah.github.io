@@ -6,6 +6,11 @@
 <title>Agung's Portfolio</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  
+  html {
+  scroll-behavior: smooth;
+  }
+
   body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -45,6 +50,7 @@
   }
   section {
     margin-bottom: 3rem;
+    scroll-margin-top: 80px;
   }
   h2 {
     border-bottom: 3px solid #3b82f6;
@@ -86,6 +92,7 @@
     flex-wrap: wrap;
     gap: 1.2rem;
   }
+  
   .skill {
     flex: 1 1 100px;
     background-color: #e0e7ff;
@@ -245,37 +252,43 @@
 
   <!-- Skills Section -->
   <section id="skills" aria-label="Skills">
-    <h2>Skills</h2>
+    <h2>Skills </h2>
+    
+    <!-- Web Development Category -->
     <div class="skill"><i class="fab fa-laravel" title="Laravel" aria-hidden="true"></i><p>Laravel</p></div>
     <div class="skill"><i class="fab fa-php" title="PHP" aria-hidden="true"></i><p>PHP</p></div>
-    <div class="skill"><i class="fab fa-python" title="Python" aria-hidden="true"></i><p>Python</p></div>
-    <div class="skill"><i class="fas fa-database" title="SQL" aria-hidden="true"></i><p>SQL</p></div>
-    <div class="skill"><i class="fab fa-js" title="JavaScript" aria-hidden="true"></i><p>JavaScript</p></div>
     <div class="skill"><i class="fab fa-react" title="React" aria-hidden="true"></i><p>React</p></div>
     <div class="skill"><i class="fab fa-vuejs" title="Vue" aria-hidden="true"></i><p>Vue</p></div>
     <div class="skill"><i class="fab fa-node-js" title="Node.js" aria-hidden="true"></i><p>Node.js</p></div>
-    <div class="skill"><i class="fab fa-python" title="Django" aria-hidden="true"></i><p>Django</p></div>
+    <div class="skill"><i class="fab fa-database" title="SQL" aria-hidden="true"></i><p>SQL</p></div>
+    <div class="skill"><i class="fab fa-html5" title="HTML" aria-hidden="true"></i><p>HTML</p></div>
+    <div class="skill"><i class="fab fa-css3" title="CSS" aria-hidden="true"></i><p>CSS</p></div>
+
+    <!-- Programming Languages Category -->
+    <div class="skill"><i class="fab fa-python" title="Python" aria-hidden="true"></i><p>Python</p></div>
     <div class="skill"><i class="fab fa-golang" title="Go" aria-hidden="true"></i><p>Go</p></div>
     <div class="skill"><i class="fab fa-cplusplus" title="C++" aria-hidden="true"></i><p>C++</p></div>
     <div class="skill"><i class="fab fa-java" title="Java" aria-hidden="true"></i><p>Java</p></div>
-    <div class="skill"><i class="fab fa-html5" title="HTML" aria-hidden="true"></i><p>HTML</p></div>
-    <div class="skill"><i class="fab fa-css3" title="CSS" aria-hidden="true"></i><p>CSS</p></div>
     <div class="skill"><i class="fab fa-r-project" title="R" aria-hidden="true"></i><p>R</p></div>
-    <div class="skill"><i class="fab fa-git-alt" title="Git" aria-hidden="true"></i><p>Git</p></div>
-    <div class="skill"><i class="fas fa-cogs" title="CI/CD" aria-hidden="true"></i><p>CI/CD</p></div>
+
+    <!-- Data Science & Cloud Services Category -->
     <div class="skill"><i class="fas fa-cloud" title="Cloud Services" aria-hidden="true"></i><p>Cloud Services</p></div>
     <div class="skill"><i class="fas fa-chart-line" title="Data Science" aria-hidden="true"></i><p>Data Science</p></div>
+    <div class="skill"><i class="fas fa-cogs" title="CI/CD" aria-hidden="true"></i><p>CI/CD</p></div>
+    <div class="skill"><i class="fab fa-git-alt" title="Git" aria-hidden="true"></i><p>Git</p></div>
+
   </section>
 
   <!-- Projects Section -->
   <section id="projects" aria-label="Projects">
     <h2>Projects</h2>
     <div class="project-filter" role="tablist" aria-label="Project Categories">
-      <button class="filter-button active" role="tab" aria-selected="true" aria-controls="project-list" data-category="backend" id="tab-backend">Backend Developer</button>
+      <button class="filter-button active" role="tab" aria-selected="true" aria-controls="project-list" data-category="all" id="tab-all">All</button>
+      <button class="filter-button" role="tab" aria-selected="true" aria-controls="project-list" data-category="backend" id="tab-backend">Backend Developer</button>
       <button class="filter-button" role="tab" aria-selected="false" aria-controls="project-list" data-category="fullstack" id="tab-fullstack">Full Stack Developer</button>
       <button class="filter-button" role="tab" aria-selected="false" aria-controls="project-list" data-category="datascience" id="tab-datascience">Data Science</button>
     </div>
-    <div id="project-list" class="project-grid" aria-live="polite" aria-atomic="true" tabindex="0">
+    <div id="project-list" class="project-grid" aria-live="polite" aria-atomic="true">
       <!-- Projects will be rendered here by JS -->
     </div>
   </section>
@@ -312,61 +325,66 @@
 </main>
 
 <script>
-  const projectsData = {
-    backend: [
-      {
-        title: "API Server for E-commerce",
-        image: "https://images.unsplash.com/photo-1560264418-5804c3855d8e?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Authentication Service",
-        image: "https://images.unsplash.com/photo-1547658719-da2b51169150?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Microservices Architecture",
-        image: "https://images.unsplash.com/photo-1531497865149-cfbeb1eaf467?auto=format&fit=crop&w=800&q=80",
-      },
-    ],
-    fullstack: [
-      {
-        title: "Social Media Web App",
-        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Project Management Tool",
-        image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Real-time Chat Application",
-        image: "https://images.unsplash.com/photo-1581092795365-9faaa9875396?auto=format&fit=crop&w=800&q=80",
-      },
-    ],
-    datascience: [
-      {
-        title: "Customer Segmentation",
-        image: "https://images.unsplash.com/photo-1573164713301-2a5223a2f22a?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Sales Forecasting Model",
-        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Sentiment Analysis Tool",
-        image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-      },
-    ],
-  };
+  const projectsData = [
+    {
+      title: "iDeviceStore Jogja",
+      image: "https://images.unsplash.com/photo-1560264418-5804c3855d8e?auto=format&fit=crop&w=800&q=80",
+      categories: ["backend"],
+    },
+    {
+      title: "Full REST API Informatics Expo V2 UII",
+      image: "https://images.unsplash.com/photo-1560264418-5804c3855d8e?auto=format&fit=crop&w=800&q=80",
+      categories: ["backend"],
+    },
+    {
+      title: "SMPN 5 Sengkang",
+      image: "https://images.unsplash.com/photo-1547658719-da2b51169150?auto=format&fit=crop&w=800&q=80",
+      categories: ["backend", "fullstack"],
+    },
+    {
+      title: "SMPN 3 Sengkang",
+      image: "https://images.unsplash.com/photo-1531497865149-cfbeb1eaf467?auto=format&fit=crop&w=800&q=80",
+      categories: ["fullstack"],
+    },
+    {
+      title: "SKL Online Junior High School",
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+      categories: ["fullstack"],
+    },
+    {
+      title: "Sekawan Informatika",
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+      categories: ["fullstack"],
+    },
+    {
+      title: "Ball Throwing Computer Vision Based Game",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
+      categories: ["datascience"],
+    },
+    {
+      title: "ETL for Twitter Data Real Time Retrieval and Sentiment Analysis",
+      image: "https://images.unsplash.com/photo-1573164713301-2a5223a2f22a?auto=format&fit=crop&w=800&q=80",
+      categories: ["datascience"],
+    },
+  ];
 
   const projectListEl = document.getElementById('project-list');
   const filterButtons = document.querySelectorAll('.filter-button');
 
   function renderProjects(category) {
-    const projects = projectsData[category] || [];
+    let projects = [];
+    if (category === 'all') {
+      projects = projectsData; // Show all projects
+    } else {
+      projects = projectsData.filter(project => project.categories.includes(category));
+    }
+
     projectListEl.innerHTML = '';
     if (projects.length === 0) {
       projectListEl.innerHTML = '<p>No projects found in this category.</p>';
       return;
     }
+
     projects.forEach(project => {
       const card = document.createElement('div');
       card.className = 'project-card';
@@ -378,6 +396,7 @@
       `;
       projectListEl.appendChild(card);
     });
+
     // For accessibility: focus project list after rendering
     projectListEl.focus();
   }
@@ -402,7 +421,7 @@
   });
 
   // Initial render with backend category selected
-  renderProjects('backend');
+  renderProjects('all');
 </script>
 </body>
 </html>

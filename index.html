@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agung's Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f9fafb;
+    color: #333;
+  }
+  header {
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+  nav a {
+    color: #f8fafc;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #3b82f6;
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  h2 {
+    border-bottom: 3px solid #3b82f6;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1.3rem;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  /* About */
+  #about {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  #about img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #3b82f6;
+    flex-shrink: 0;
+  }
+  #about .about-text {
+    flex: 1 1 300px;
+  }
+  #about .about-text h3 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    color: #0f172a;
+  }
+  #about .about-text p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  /* Skills */
+  #skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .skill {
+    flex: 1 1 100px;
+    background-color: #e0e7ff;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    transition: transform 0.2s ease;
+    cursor: default;
+  }
+  .skill:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgb(59 130 246 / 0.3);
+  }
+  .skill i {
+    font-size: 2.5rem;
+    color: #3b82f6;
+    margin-bottom: 0.5rem;
+    vertical-align: middle;
+  }
+  .skill p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1e293b;
+  }
+  /* Projects */
+  #projects .project-filter {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  #projects .filter-button {
+    background: #e0e7ff;
+    border: 2px solid #3b82f6;
+    color: #1e293b;
+    padding: 0.5rem 1.3rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+  #projects .filter-button:hover {
+    background: #3b82f6;
+    color: white;
+  }
+  #projects .filter-button.active {
+    background: #3b82f6;
+    color: white;
+    cursor: default;
+  }
+  #projects .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.25s ease;
+  }
+  .project-card:hover {
+    box-shadow: 0 8px 24px rgb(59 130 246 / 0.3);
+  }
+  .project-card img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+  .project-card .project-info {
+    padding: 0.8rem 1rem;
+  }
+  .project-card .project-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #1e293b;
+  }
+  /* Experience */
+  #experience .exp-item {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+    margin-bottom: 1.2rem;
+    padding: 1rem 1.2rem;
+    transition: box-shadow 0.3s ease;
+  }
+  #experience .exp-item:hover {
+    box-shadow: 0 5px 15px rgb(59 130 246 / 0.25);
+  }
+  #experience .exp-item h4 {
+    margin: 0 0 0.3rem;
+    color: #1e293b;
+    font-weight: 600;
+  }
+  #experience .exp-item .exp-duration {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+  }
+  #experience .exp-item p {
+    margin: 0;
+    font-size: 1rem;
+    color: #334155;
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    #about {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    #about .about-text {
+      flex: none;
+    }
+    nav {
+      display: none; /* For very simple mobile, no nav */
+    }
+  }
+</style>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+</head>
+<body>
+<header>
+  <h1>My Portfolio</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+  </nav>
+</header>
+<main>
+  <!-- About Section -->
+  <section id="about" aria-label="About Me">
+    <img src="https://i.imgur.com/TfejhSN.jpeg" alt="Profile Picture of Me" />
+    <div class="about-text">
+      <h3>Agung Fitrah Ramadhana Ukfah</h3>
+      <p>
+        Professional developer with a passion for building scalable web
+        applications and data-driven solutions. Experienced in backend, full stack, and data science projects.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" aria-label="Skills">
+    <h2>Skills</h2>
+    <div class="skill"><i class="fab fa-laravel" title="Laravel" aria-hidden="true"></i><p>Laravel</p></div>
+    <div class="skill"><i class="fab fa-php" title="PHP" aria-hidden="true"></i><p>PHP</p></div>
+    <div class="skill"><i class="fab fa-python" title="Python" aria-hidden="true"></i><p>Python</p></div>
+    <div class="skill"><i class="fas fa-database" title="SQL" aria-hidden="true"></i><p>SQL</p></div>
+    <div class="skill"><i class="fab fa-js" title="JavaScript" aria-hidden="true"></i><p>JavaScript</p></div>
+    <div class="skill"><i class="fab fa-react" title="React" aria-hidden="true"></i><p>React</p></div>
+    <div class="skill"><i class="fab fa-vuejs" title="Vue" aria-hidden="true"></i><p>Vue</p></div>
+    <div class="skill"><i class="fab fa-node-js" title="Node.js" aria-hidden="true"></i><p>Node.js</p></div>
+    <div class="skill"><i class="fab fa-python" title="Django" aria-hidden="true"></i><p>Django</p></div>
+    <div class="skill"><i class="fab fa-golang" title="Go" aria-hidden="true"></i><p>Go</p></div>
+    <div class="skill"><i class="fab fa-cplusplus" title="C++" aria-hidden="true"></i><p>C++</p></div>
+    <div class="skill"><i class="fab fa-java" title="Java" aria-hidden="true"></i><p>Java</p></div>
+    <div class="skill"><i class="fab fa-html5" title="HTML" aria-hidden="true"></i><p>HTML</p></div>
+    <div class="skill"><i class="fab fa-css3" title="CSS" aria-hidden="true"></i><p>CSS</p></div>
+    <div class="skill"><i class="fab fa-r-project" title="R" aria-hidden="true"></i><p>R</p></div>
+    <div class="skill"><i class="fab fa-git-alt" title="Git" aria-hidden="true"></i><p>Git</p></div>
+    <div class="skill"><i class="fas fa-cogs" title="CI/CD" aria-hidden="true"></i><p>CI/CD</p></div>
+    <div class="skill"><i class="fas fa-cloud" title="Cloud Services" aria-hidden="true"></i><p>Cloud Services</p></div>
+    <div class="skill"><i class="fas fa-chart-line" title="Data Science" aria-hidden="true"></i><p>Data Science</p></div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" aria-label="Projects">
+    <h2>Projects</h2>
+    <div class="project-filter" role="tablist" aria-label="Project Categories">
+      <button class="filter-button active" role="tab" aria-selected="true" aria-controls="project-list" data-category="backend" id="tab-backend">Backend Developer</button>
+      <button class="filter-button" role="tab" aria-selected="false" aria-controls="project-list" data-category="fullstack" id="tab-fullstack">Full Stack Developer</button>
+      <button class="filter-button" role="tab" aria-selected="false" aria-controls="project-list" data-category="datascience" id="tab-datascience">Data Science</button>
+    </div>
+    <div id="project-list" class="project-grid" aria-live="polite" aria-atomic="true" tabindex="0">
+      <!-- Projects will be rendered here by JS -->
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" aria-label="Experience">
+    <h2>Experience</h2>
+    <div class="exp-item">
+      <h4>Full Stack Developer - Freelance GebutDev</h4>
+      <div class="exp-duration">Sep 2022 - Jun 2024</div>
+      <p>Developed and maintained RESTful APIs using Node.js and Express. Optimized database queries improving overall performance by 30%.</p>
+    </div>
+    <div class="exp-item">
+      <h4>Web Developer - Student Staff Informatika UII</h4>
+      <div class="exp-duration">Dec 2019 - Sep 2021</div>
+      <p>Built scalable web applications using React and Node.js. Led the integration of CI/CD pipelines reducing release time by 40%.</p>
+    </div>
+    <div class="exp-item">
+      <h4>Data Engineer - Budi Mulia Dua Foundation</h4>
+      <div class="exp-duration">Mar 2021 - Aug 2021</div>
+      <p>Performed data analysis and created predictive models using Python and machine learning libraries to support business decisions.</p>
+    </div>
+    <div class="exp-item">
+      <h4>Laboratory Asisstant - Laboratorium Terpadu Informatika UII</h4>
+      <div class="exp-duration">Aug 2019 - Jul 2021</div>
+      <p>Performed data analysis and created predictive models using Python and machine learning libraries to support business decisions.</p>
+    </div>
+    <div class="exp-item">
+      <h4>Lecturer Asisstant - Informatika UII</h4>
+      <div class="exp-duration">Aug 2019 - Jan 2021</div>
+      <p>Performed data analysis and created predictive models using Python and machine learning libraries to support business decisions.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  const projectsData = {
+    backend: [
+      {
+        title: "API Server for E-commerce",
+        image: "https://images.unsplash.com/photo-1560264418-5804c3855d8e?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        title: "Authentication Service",
+        image: "https://images.unsplash.com/photo-1547658719-da2b51169150?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        title: "Microservices Architecture",
+        image: "https://images.unsplash.com/photo-1531497865149-cfbeb1eaf467?auto=format&fit=crop&w=800&q=80",
+      },
+    ],
+    fullstack: [
+      {
+        title: "Social Media Web App",
+        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        title: "Project Management Tool",
+        image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        title: "Real-time Chat Application",
+        image: "https://images.unsplash.com/photo-1581092795365-9faaa9875396?auto=format&fit=crop&w=800&q=80",
+      },
+    ],
+    datascience: [
+      {
+        title: "Customer Segmentation",
+        image: "https://images.unsplash.com/photo-1573164713301-2a5223a2f22a?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        title: "Sales Forecasting Model",
+        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        title: "Sentiment Analysis Tool",
+        image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
+      },
+    ],
+  };
+
+  const projectListEl = document.getElementById('project-list');
+  const filterButtons = document.querySelectorAll('.filter-button');
+
+  function renderProjects(category) {
+    const projects = projectsData[category] || [];
+    projectListEl.innerHTML = '';
+    if (projects.length === 0) {
+      projectListEl.innerHTML = '<p>No projects found in this category.</p>';
+      return;
+    }
+    projects.forEach(project => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <img src="${project.image}" alt="${project.title}" />
+        <div class="project-info">
+          <h3>${project.title}</h3>
+        </div>
+      `;
+      projectListEl.appendChild(card);
+    });
+    // For accessibility: focus project list after rendering
+    projectListEl.focus();
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // If this button is already active, do nothing
+      if (button.classList.contains('active')) return;
+
+      // Remove active class and aria-selected from all buttons
+      filterButtons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      // Add active class and aria-selected to clicked button
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+
+      // Render projects for selected category
+      renderProjects(button.getAttribute('data-category'));
+    });
+  });
+
+  // Initial render with backend category selected
+  renderProjects('backend');
+</script>
+</body>
+</html>
+

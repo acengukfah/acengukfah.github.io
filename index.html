@@ -197,11 +197,11 @@
             </h2>
             <div class="flex items-center justify-center md:justify-start mb-4 text-lg text-gray-600">
               <i class="fas fa-map-marker-alt mr-2 text-blue-500 animate-bounce-slow"></i>
-              <span>Daerah Istimewa Yogyakarta, Indonesia</span>
+              <span>Daerah Istimewa Yogyakarta</span>
             </div>
             <div class="flex items-center justify-center md:justify-start mb-6 text-gray-600">
               <i class="fas fa-flag mr-2 text-red-500"></i>
-              <span class="font-medium">🇮🇩 Daerah Istimewa Yogyakarta, Indonesia</span>
+              <span class="font-medium">🇮🇩 Indonesia</span>
             </div>
             <p class="text-lg leading-relaxed text-gray-700 mb-6">
               Professional developer with a passion for building scalable web
@@ -417,18 +417,18 @@
         <!-- Contact Form -->
         <div class="card-hover bg-white rounded-2xl shadow-2xl p-8 animate-fadeInLeft">
           <h3 class="text-2xl font-bold text-slate-800 mb-6">Send Message</h3>
-          <form id="contactForm" class="space-y-6">
+          <form id="contactForm" action="https://formspree.io/f/mdkgqaeb" method="POST" class="space-y-6">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
-              <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="John Doe" required>
+              <input name="name" type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="John Doe" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-              <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="john@example.com" required>
+              <input name="email" type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="john@example.com" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-              <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="Tell me about your project..." required></textarea>
+              <textarea name="message" id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" placeholder="Tell me about your project..." required></textarea>
             </div>
             <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               <i class="fas fa-paper-plane mr-2"></i>
@@ -550,75 +550,111 @@
     const projectsData = [
       {
         title: "iDeviceStore Jogja",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
+        image: "images/idevicestore-jogja.jpg",
         categories: ["fullstack"],
-        techStack: ["Django", "React", "MySQL", "JWT", "Tailwind"],
-        github: "https://github.com/agung-fitrah/idevicestore-jogja",
+        techStack: ["Django", "React", "MySQL", "Tailwind"],
+        github: "https://github.com/acengukfah/GebutDev-idevicestore",
         liveDemo: "https://idevicestore-jogja.com",
-        description: "E-commerce platform for Apple devices with inventory management and payment integration."
+        description: "Web app for Apple devices with inventory management and payment integration."
+      },
+      {
+        title: "ICITDA Online Conference",
+        image: "images/icitda.png",
+        categories: ["backend"],
+        techStack: ["Laravel", "PHP", "MySQL"],
+        github: "https://github.com/acengukfah/icitda",
+        liveDemo: "https://icitda.org/",
+        description: "An online platform for scheduling and hosting ICITDA conferences."
       },
       {
         title: "Full REST API Informatics Expo V2 UII",
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=800&q=80",
+        image: "images/informatics-expo.png",
         categories: ["backend"],
-        techStack: ["Laravel", "PHP", "MySQL", "REST API"],
-        github: "https://github.com/agung-fitrah/informatics-expo-api",
-        liveDemo: "https://api.informaticsexpo.uii.ac.id",
+        techStack: ["Laravel", "MySQL", "REST API", "JWT"],
+        github: "https://github.com/acengukfah/informatics-expo-v2-api",
+        liveDemo: "https://informatics.uii.ac.id/sarjana/informatics-expo/",
         description: "Comprehensive REST API for university informatics expo event management system."
       },
       {
+        title: "Ball Throwing Computer Vision Game",
+        image: "images/ball-throwing-game.png",
+        categories: ["datascience"],
+        techStack: ["Python", "OpenCV", "YOLO", "NumPy"],
+        github: "https://github.com/acengukfah/ball-throwing-cv-game",
+        liveDemo: null,
+        description: "Interactive game using computer vision to detect and track ball throwing motions."
+      },
+      {
+        title: "Stream 24/7 tweet ETL",
+        image: "images/twitter-etl.png",
+        categories: ["datascience"],
+        techStack: ["Python", "Apache Airflow", "Pandas", "Scikit-learn"],
+        github: "https://github.com/acengukfah/data-ranger",
+        liveDemo: null,
+        description: "Real-time ETL pipeline for Twitter data retrieval and sentiment analysis using ML."
+      },
+      {
+        title: "Daily Logbook BPN Kabupaten Klaten",
+        image: "images/BPN-Klaten.jpg",
+        categories: ["fullstack"],
+        techStack: ["Laravel", "PHP", "MySQL", "Bootstrap"],
+        github: "https://github.com/acengukfah/BukuHarian-BPN",
+        liveDemo: null,
+        description: "Rebuilding a traditional Google Form into an interactive web application for daily logbook."
+      },
+      {
         title: "SMPN 5 Sengkang",
-        image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?auto=format&fit=crop&w=800&q=80",
+        image: "images/smpn5sengkang.jpeg",
         categories: ["backend", "fullstack"],
         techStack: ["Laravel", "Vue.js", "MySQL", "Bootstrap"],
-        github: "https://github.com/agung-fitrah/smpn5-sengkang",
+        github: "https://github.com/acengukfah/GebutDev-cms-sekolah",
         liveDemo: "https://smpn5sengkang.sch.id",
         description: "Complete school management system with student information and academic tracking."
       },
       {
-        title: "SMPN 3 Sengkang",
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?auto=format&fit=crop&w=800&q=80",
+        title: "SMPN 3 Majauleng",
+        image: "images/smpn3majauleng.jpg",
         categories: ["fullstack"],
-        techStack: ["React", "Node.js", "PostgreSQL", "Tailwind"],
-        github: "https://github.com/agung-fitrah/smpn3-sengkang",
+        techStack: ["Laravel", "React", "MySQL", "Tailwind"],
+        github: "https://github.com/acengukfah/GebutDev-web-sekolah",
         liveDemo: "https://smpn3sengkang.sch.id",
         description: "Modern school website with dynamic content management and online registration."
       },
       {
         title: "SKL Online Junior High School",
-        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
+        image: "images/smpn3majauleng.webp",
         categories: ["fullstack"],
         techStack: ["Laravel", "React", "MySQL", "PDF Generator"],
-        github: "https://github.com/agung-fitrah/skl-online",
-        liveDemo: "https://skl.smpn3sengkang.sch.id",
+        github: "https://github.com/acengukfah/GebutDev-web-sekolah",
+        liveDemo: "https://kelulusan.smpn3sengkang.sch.id",
         description: "Online certificate generation system for junior high school graduates."
       },
       {
+        title: "Warung Rakyat UII",
+        image: "images/warung-rakyat.jpg",
+        categories: ["fullstack"],
+        techStack: ["Laravel", "MySQL", "AJAX", "Bootstrap"],
+        github: "https://github.com/acengukfah/vlt-pasarrakyatuii",
+        liveDemo: "https://fit.uii.ac.id/blog/2020/04/22/warung-rakyat-uii/",
+        description: "An online marketplace by UII supporting UMKM during COVID-19."
+      },
+      {
         title: "Sekawan Informatika",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+        image: "images/sekawan-informatika.png",
         categories: ["fullstack"],
         techStack: ["Vue.js", "Laravel", "MySQL", "Vuetify"],
-        github: "https://github.com/agung-fitrah/sekawan-informatika",
-        liveDemo: "https://sekawaninformatika.com",
-        description: "Corporate website for IT consulting company with service portfolio showcase."
+        github: "https://github.com/acengukfah/si-penjaluran",
+        liveDemo: "https://sekawan.informatics.uii.ac.id/",
+        description: "UII website to support academic activities during the fourth year of study."
       },
       {
-        title: "Ball Throwing Computer Vision Game",
-        image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=800&q=80",
-        categories: ["datascience"],
-        techStack: ["Python", "OpenCV", "TensorFlow", "NumPy"],
-        github: "https://github.com/agung-fitrah/ball-throwing-cv-game",
+        title: "Amaliah",
+        image: "images/fitur-3.svg",
+        categories: ["backend"],
+        techStack: ["Laravel", "Lumen", "MySQL", "REST API"],
+        github: "https://github.com/acengukfah/amaliah-user-lumen",
         liveDemo: null,
-        description: "Interactive game using computer vision to detect and track ball throwing motions."
-      },
-      {
-        title: "Twitter Sentiment Analysis ETL",
-        image: "https://images.unsplash.com/photo-1611605698323-b1e99cfd37ea?auto=format&fit=crop&w=800&q=80",
-        categories: ["datascience"],
-        techStack: ["Python", "Apache Airflow", "Pandas", "Scikit-learn"],
-        github: "https://github.com/agung-fitrah/twitter-sentiment-etl",
-        liveDemo: null,
-        description: "Real-time ETL pipeline for Twitter data retrieval and sentiment analysis using ML."
+        description: "A web application for managing and tracking social assistance distribution."
       },
     ];
 
@@ -760,24 +796,37 @@
     // Contact form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-      
-      // Simple form validation and success message
-      if (name && email && message) {
-        alert('Thank you for your message! I\'ll get back to you soon.');
-        this.reset();
-      }
+
+      const form = this;
+      const formData = new FormData(form);
+
+      fetch('https://formspree.io/f/mdkgqaeb', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Thank you for your message! I\'ll get back to you soon.');
+          form.reset();
+        } else {
+          response.json().then(data => {
+            alert(data.error || 'Oops! There was a problem submitting your form.');
+          });
+        }
+      })
+      .catch(() => {
+        alert('Oops! There was a problem submitting your form.');
+      });
     });
+
 
     // CV Download function
     function downloadCV() {
       // Create a temporary link element
       const link = document.createElement('a');
-      link.href = '#'; // Replace with actual CV file path
-      link.download = 'Agung_Fitrah_CV.pdf';
+      link.href = 'files/Agung-Fitrah-Ramadhana-Ukfah.pdf'; // Replace with actual CV file path
+      link.download = 'Agung_Ukfah_CV.pdf';
       link.click();
       
       // Show notification

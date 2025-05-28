@@ -492,8 +492,8 @@
 
         <!-- Contact Info -->
         <div class="space-y-6 animate-fadeInRight">
-          <div class="card-hover bg-white rounded-2xl shadow-2xl p-6">
-            <div class="flex items-center space-x-4">
+          <a href="mailto:agungukfah@gmail.com" class="block card-hover bg-white rounded-2xl shadow-2xl p-6 transition-transform hover:scale-105 focus:scale-105">
+            <div class="flex items-center space-x-4 cursor-pointer">
               <div class="flex-shrink-0">
                 <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                   <i class="fas fa-envelope text-white"></i>
@@ -501,13 +501,13 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-slate-800">Email</h3>
-                <a href="mailto:agungukfah@gmail.com" class="text-gray-600 hover:text-blue-600 transition-colors">agungukfah@gmail.com</a>
+                <span class="text-gray-600 group-hover:text-blue-600 transition-colors">agungukfah@gmail.com</span>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="card-hover bg-white rounded-2xl shadow-2xl p-6">
-            <div class="flex items-center space-x-4">
+          <a href="tel:+6285225224054" class="block card-hover bg-white rounded-2xl shadow-2xl p-6 transition-transform hover:scale-105 focus:scale-105">
+            <div class="flex items-center space-x-4 cursor-pointer">
               <div class="flex-shrink-0">
                 <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center">
                   <i class="fas fa-phone text-white"></i>
@@ -515,13 +515,13 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-slate-800">Phone</h3>
-                <a href="tel:+6285225224054" class="text-gray-600 hover:text-green-600 transition-colors">(+62) 852-2522-4054</a>
+                <span class="text-gray-600 group-hover:text-green-600 transition-colors">(+62) 852-2522-4054</span>
               </div>
             </div>
-          </div>
+          </a>
 
-          <div class="card-hover bg-white rounded-2xl shadow-2xl p-6">
-            <div class="flex items-center space-x-4">
+          <a href="https://maps.google.com/?q=Daerah+Istimewa+Yogyakarta,+Indonesia" target="_blank" class="block card-hover bg-white rounded-2xl shadow-2xl p-6 transition-transform hover:scale-105 focus:scale-105">
+            <div class="flex items-center space-x-4 cursor-pointer">
               <div class="flex-shrink-0">
                 <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
                   <i class="fas fa-map-marker-alt text-white"></i>
@@ -529,10 +529,10 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-slate-800">Location</h3>
-                <p class="text-gray-600">Daerah Istimewa Yogyakarta, Indonesia</p>
+                <span class="text-gray-600 group-hover:text-pink-600 transition-colors">Daerah Istimewa Yogyakarta, Indonesia</span>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Social Links -->
           <div class="card-hover bg-white rounded-2xl shadow-2xl p-6">
@@ -931,7 +931,12 @@
         showNotification('Oops! There was a problem submitting your form.', 'fas fa-exclamation-triangle');
       });
     });
-
+    
+    document.querySelectorAll('.card-hover').forEach(card => {
+      card.addEventListener('mouseup', () => {
+        card.blur();
+      });
+    });
 
     // CV Download function
     function downloadCV() {

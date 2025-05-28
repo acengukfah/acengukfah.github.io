@@ -141,6 +141,54 @@
     transform-origin: left;
     z-index: 9999;
   }
+
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transform: translateX(400px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .notification.show {
+    transform: translateX(0);
+  }
+
+  .notification i {
+    margin-right: 8px;
+  }
+
+  .circular-loading {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top: 4px solid #3b82f6;
+    border-right: 4px solid #8b5cf6;
+    border-bottom: 4px solid #3b82f6;
+    border-left: 4px solid #8b5cf6;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 20;
+    animation: spin 1s linear infinite;
+  }
+
+  .circular-loading.active {
+    opacity: 1;
+  }
+
+  @keyframes spin {
+    100% { transform: rotate(360deg); }
+  }
 </style>
 </head>
 <body class="font-inter bg-gray-50 text-gray-800 overflow-x-hidden">
@@ -150,7 +198,10 @@
   <!-- Header -->
   <header class="gradient-bg text-white px-4 sm:px-8 py-4 sticky top-0 z-50 shadow-2xl backdrop-blur-sm">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <h1 class="text-xl sm:text-2xl font-bold animate-fadeInLeft">Agung's Portfolio</h1>
+      <h1 class="text-xl sm:text-2xl font-bold animate-fadeInLeft">
+        <a href="#about" class="hover:text-blue-300 transition-all duration-300 cursor-pointer">Agung's Portfolio</a>
+      </h1>
+
       <nav class="hidden md:flex space-x-6">
         <a href="#about" class="hover:text-blue-300 transition-all duration-300 hover:scale-110 transform">About</a>
         <a href="#skills" class="hover:text-blue-300 transition-all duration-300 hover:scale-110 transform">Skills</a>
@@ -183,12 +234,14 @@
         <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
           <div class="flex-shrink-0 animate-fadeInLeft">
             <div class="relative">
+              <div class="circular-loading" id="profileLoading"></div>
               <img 
-                src="https://i.imgur.com/TfejhSN.jpeg" 
+                src="images/profile-online.jpeg" 
                 alt="Agung Fitrah Ramadhana Ukfah - Profile Picture" 
-                class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-500 object-cover shadow-2xl animate-glow"
+                class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-500 object-cover shadow-2xl animate-glow cursor-pointer transition-all duration-300"
+                id="profileImage"
               />
-              <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
+              <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full border-2 border-white animate-pulse transition-all duration-300" id="statusIndicator"></div>
             </div>
           </div>
           <div class="flex-1 text-center md:text-left animate-fadeInRight">
@@ -210,9 +263,9 @@
               that make a difference.
             </p>
             <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
-              <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium animate-pulse-slow">Backend Developer</span>
-              <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-full font-medium animate-pulse-slow">Full Stack</span>
-              <span class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-medium animate-pulse-slow">Data Science</span>
+              <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium animate-pulse-slow cursor-pointer hover:scale-105 transform transition-all duration-300" onclick="scrollToProjectsAndFilter('backend')">Backend Developer</span>
+              <span class="px-4 py-2 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-full font-medium animate-pulse-slow cursor-pointer hover:scale-105 transform transition-all duration-300" onclick="scrollToProjectsAndFilter('fullstack')">Full Stack</span>
+              <span class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-medium animate-pulse-slow cursor-pointer hover:scale-105 transform transition-all duration-300" onclick="scrollToProjectsAndFilter('datascience')">Data Science</span>
             </div>
             
             <!-- CV Download Button -->
@@ -448,7 +501,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-slate-800">Email</h3>
-                <p class="text-gray-600">agungukfah@gmail.com</p>
+                <a href="mailto:agungukfah@gmail.com" class="text-gray-600 hover:text-blue-600 transition-colors">agungukfah@gmail.com</a>
               </div>
             </div>
           </div>
@@ -462,7 +515,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold text-slate-800">Phone</h3>
-                <p class="text-gray-600">(+62) 852-2522-4054</p>
+                <a href="tel:+6285225224054" class="text-gray-600 hover:text-green-600 transition-colors">(+62) 852-2522-4054</a>
               </div>
             </div>
           </div>
@@ -496,6 +549,9 @@
               </a>
               <a href="https://discord.com/users/burongki" target="_blank" class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110">
                 <i class="fab fa-discord"></i>
+              </a>
+              <a href="https://wa.me/6285225224054" target="_blank" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110">
+                <i class="fab fa-whatsapp"></i>
               </a>
             </div>
           </div>
@@ -531,6 +587,9 @@
             </a>
             <a href="https://discord.com/users/burongki" target="_blank" class="text-gray-300 hover:text-white transition-colors transform hover:scale-110">
               <i class="fab fa-discord text-xl"></i>
+            </a>
+            <a href="https://wa.me/6285225224054" target="_blank" class="text-gray-300 hover:text-white transition-colors transform hover:scale-110">
+              <i class="fab fa-whatsapp text-xl"></i>
             </a>
           </div>
         </div>
@@ -793,6 +852,59 @@
       });
     });
 
+    function showNotification(message, icon = 'fas fa-check-circle') {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = `<i class="${icon}"></i>${message}`;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => notification.classList.add('show'), 100);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => document.body.removeChild(notification), 400);
+      }, 3000);
+    }
+
+    // Enhanced CV download function
+    function downloadCV() {
+      const link = document.createElement('a');
+      link.href = 'files/Agung-Fitrah-Ramadhana-Ukfah.pdf';
+      link.download = 'Agung_Ukfah_CV.pdf';
+      link.click();
+      
+      showNotification('CV download will start shortly!', 'fas fa-download');
+    }
+
+    // Enhanced scroll to contact function
+    function scrollToContact() {
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Scroll to projects and filter function
+    function scrollToProjectsAndFilter(category) {
+      // Scroll to projects section
+      document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+      
+      // Update filter buttons
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'active');
+        btn.classList.add('bg-gray-200', 'text-gray-700');
+      });
+      
+      // Find and activate the correct filter button
+      const targetButton = document.querySelector(`[data-category="${category}"]`);
+      if (targetButton) {
+        targetButton.classList.remove('bg-gray-200', 'text-gray-700');
+        targetButton.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'active');
+      }
+      
+      // Filter projects without notification
+      setTimeout(() => {
+        renderProjects(category);
+      }, 500);
+    }
+
     // Contact form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -807,16 +919,16 @@
       })
       .then(response => {
         if (response.ok) {
-          alert('Thank you for your message! I\'ll get back to you soon.');
+          showNotification('Message sent successfully! I\'ll get back to you soon.', 'fas fa-paper-plane');
           form.reset();
         } else {
           response.json().then(data => {
-            alert(data.error || 'Oops! There was a problem submitting your form.');
+            showNotification(data.error || 'Oops! There was a problem submitting your form.', 'fas fa-exclamation-triangle');
           });
         }
       })
       .catch(() => {
-        alert('Oops! There was a problem submitting your form.');
+        showNotification('Oops! There was a problem submitting your form.', 'fas fa-exclamation-triangle');
       });
     });
 
@@ -830,7 +942,7 @@
       link.click();
       
       // Show notification
-      alert('CV download will start shortly!');
+      showNotification('CV download will start shortly!', 'fas fa-download');
     }
 
     // Scroll to contact function
@@ -873,6 +985,64 @@
 
     // Start typing animation after a delay
     setTimeout(typeTitle, 1000);
+
+    // Profile picture toggle functionality
+    let isOnline = localStorage.getItem('profileOnline') !== 'false'; // default true
+    let hoverTimeout = null;
+    const profileImage = document.getElementById('profileImage');
+    const statusIndicator = document.getElementById('statusIndicator');
+    const profileLoading = document.getElementById('profileLoading');
+
+    const offlineImageUrl = 'images/profile-offline.png';
+    const onlineImageUrl = 'images/profile-online.jpeg';
+
+    // Set initial state
+    function setProfileState(online) {
+      isOnline = online;
+      localStorage.setItem('profileOnline', online);
+      if (isOnline) {
+        statusIndicator.classList.remove('bg-gray-400');
+        statusIndicator.classList.add('bg-green-500');
+        profileImage.src = onlineImageUrl;
+      } else {
+        statusIndicator.classList.remove('bg-green-500');
+        statusIndicator.classList.add('bg-gray-400');
+        profileImage.src = offlineImageUrl;
+      }
+    }
+    setProfileState(isOnline);
+
+    if (profileImage && statusIndicator && profileLoading) {
+      profileImage.addEventListener('mouseenter', () => {
+        profileLoading.classList.add('active');
+        hoverTimeout = setTimeout(() => {
+          setProfileState(!isOnline);
+          profileLoading.classList.remove('active');
+        }, 1500);
+      });
+
+      profileImage.addEventListener('mouseleave', () => {
+        profileLoading.classList.remove('active');
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = null;
+        }
+      });
+
+      profileImage.addEventListener('click', () => {
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = null;
+        }
+        profileImage.classList.add('clicking');
+        profileLoading.classList.add('active');
+        setTimeout(() => {
+          setProfileState(!isOnline);
+          profileLoading.classList.remove('active');
+          profileImage.classList.remove('clicking');
+        }, 1500);
+      });
+    }
   </script>
 </body>
 </html>

@@ -1,14 +1,14 @@
 // Project Data
 const projectsData = [
-  {
-    title: "iDeviceStore Jogja",
-    image: "images/idevicestore-jogja.jpg",
-    categories: ["fullstack"],
-    techStack: ["Django", "React", "MySQL", "Tailwind"],
-    github: "https://github.com/acengukfah/GebutDev-idevicestore",
-    liveDemo: "https://idevicestore-jogja.com",
-    description: "Web app for Apple devices with inventory management and payment integration."
-  },
+  // {
+  //   title: "iDeviceStore Jogja",
+  //   image: "images/idevicestore-jogja.jpg",
+  //   categories: ["fullstack"],
+  //   techStack: ["Django", "React", "MySQL", "Tailwind"],
+  //   github: "https://github.com/acengukfah/GebutDev-idevicestore",
+  //   liveDemo: "https://idevicestore-jogja.com",
+  //   description: "Web app for Apple devices with inventory management and payment integration."
+  // },
   {
     title: "ICITDA Online Conference",
     image: "images/icitda.png",
@@ -19,42 +19,6 @@ const projectsData = [
     description: "An online platform for scheduling and hosting ICITDA conferences."
   },
   {
-    title: "Full REST API Informatics Expo V2 UII",
-    image: "images/informatics-expo.png",
-    categories: ["backend"],
-    techStack: ["Laravel", "MySQL", "REST API", "JWT"],
-    github: "https://github.com/acengukfah/informatics-expo-v2-api",
-    liveDemo: "https://informatics.uii.ac.id/sarjana/informatics-expo/",
-    description: "Comprehensive REST API for university informatics expo event management system."
-  },
-  {
-    title: "Ball Throwing Computer Vision Game",
-    image: "images/ball-throwing-game.png",
-    categories: ["datascience"],
-    techStack: ["Python", "OpenCV", "YOLO", "NumPy"],
-    github: "https://github.com/acengukfah/ball-throwing-cv-game",
-    liveDemo: null,
-    description: "Interactive game using computer vision to detect and track ball throwing motions."
-  },
-  {
-    title: "Baby is You from Baba is You",
-    image: "images/baby-is-you.png",
-    categories: ["fullstack"],
-    techStack: ["C#", "Unity", "GameDev"],
-    github: "https://github.com/acengukfah/baby-is-you",
-    liveDemo: "/baby-is-you",
-    description: "A clever puzzle game where you manipulate words to change the rules and solve levels."
-  },
-  {
-    title: "Stream 24/7 tweet ETL",
-    image: "images/twitter-etl.png",
-    categories: ["datascience"],
-    techStack: ["Python", "Apache Airflow", "Pandas", "Scikit-learn"],
-    github: "https://github.com/acengukfah/data-ranger",
-    liveDemo: null,
-    description: "Real-time ETL pipeline for Twitter data retrieval and sentiment analysis using ML."
-  },
-  {
     title: "Daily Logbook BPN Kabupaten Klaten",
     image: "images/BPN-Klaten.jpg",
     categories: ["fullstack"],
@@ -62,6 +26,15 @@ const projectsData = [
     github: "https://github.com/acengukfah/BukuHarian-BPN",
     liveDemo: null,
     description: "Rebuilding a traditional Google Form into an interactive web application for daily logbook."
+  },
+  {
+    title: "Full REST API Informatics Expo V2 UII",
+    image: "images/informatics-expo.png",
+    categories: ["backend"],
+    techStack: ["Laravel", "MySQL", "REST API", "JWT"],
+    github: "https://github.com/acengukfah/informatics-expo-v2-api",
+    liveDemo: "https://informatics.uii.ac.id/sarjana/informatics-expo/",
+    description: "Comprehensive REST API for university informatics expo event management system."
   },
   {
     title: "SMPN 5 Sengkang",
@@ -116,6 +89,33 @@ const projectsData = [
     github: "https://github.com/acengukfah/amaliah-user-lumen",
     liveDemo: null,
     description: "A web application for managing and tracking social assistance distribution."
+  },
+  {
+    title: "Ball Throwing Computer Vision Game",
+    image: "images/ball-throwing-game.png",
+    categories: ["datascience"],
+    techStack: ["Python", "OpenCV", "YOLO", "NumPy"],
+    github: "https://github.com/acengukfah/ball-throwing-cv-game",
+    liveDemo: null,
+    description: "Interactive game using computer vision to detect and track ball throwing motions."
+  },
+  {
+    title: "Baby is You from Baba is You",
+    image: "images/baby-is-you.png",
+    categories: ["fullstack"],
+    techStack: ["C#", "Unity", "GameDev"],
+    github: "https://github.com/acengukfah/baby-is-you",
+    liveDemo: "/baby-is-you",
+    description: "A clever puzzle game where you manipulate words to change the rules and solve levels."
+  },
+  {
+    title: "Stream 24/7 tweet ETL",
+    image: "images/twitter-etl.png",
+    categories: ["datascience"],
+    techStack: ["Python", "Apache Airflow", "Pandas", "Scikit-learn"],
+    github: "https://github.com/acengukfah/data-ranger",
+    liveDemo: null,
+    description: "Real-time ETL pipeline for Twitter data retrieval and sentiment analysis using ML."
   },
 ];
 

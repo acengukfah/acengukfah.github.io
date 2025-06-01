@@ -1,3 +1,11 @@
+// Smooth scroll function for the contact section
+window.scrollToContact = function() {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
   // Mobile Menu Toggle
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');

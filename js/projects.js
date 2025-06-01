@@ -146,9 +146,10 @@ function createProjectCard(project, index) {
 
   return `
     <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden animate-fadeInUp" style="animation-delay: ${index * 100}ms">
-      <div class="relative group">
-        <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div class="relative group cursor-pointer" onclick="openImageModal('${project.image}', '${project.title}')">
+        <img src="${project.image}" alt="${project.title}" 
+             class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
       </div>
       <div class="p-6">
         <h3 class="text-xl font-bold text-slate-800 mb-2">${project.title}</h3>
@@ -160,6 +161,19 @@ function createProjectCard(project, index) {
       </div>
     </div>
   `;
+}
+
+// Image modal functions
+function openImageModal(imageSrc, imageAlt) {
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  
+  modalImage.src = imageSrc;
+  modalImage.alt = imageAlt;
+  modal.classList.remove('hidden');
+  
+  // Prevent body scrolling when modal is open
+  document.body.style.overflow = 'hidden';
 }
 
 function renderProjects(category) {
@@ -178,6 +192,34 @@ function renderProjects(category) {
 // Initialize projects when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.filter-button');
+  const modal = document.getElementById('imageModal');
+  const closeModal = document.getElementById('closeModal');
+  
+  // Modal close button handler
+  if (closeModal) {
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+  }
+  
+  // Close modal when clicking outside the image
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+  });
   
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {

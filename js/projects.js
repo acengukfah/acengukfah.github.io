@@ -145,7 +145,7 @@ function createProjectCard(project, index) {
   `;
 
   return `
-    <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden opacity-0 animate-fadeInUp" style="animation-delay: ${index * 0.1}s;">
+    <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden animate-fadeInUp" style="animation-delay: ${index * 100}ms">
       <div class="relative group">
         <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -171,14 +171,8 @@ function renderProjects(category) {
     return;
   }
 
+  // Update content
   projectListEl.innerHTML = projects.map((project, index) => createProjectCard(project, index)).join('');
-  
-  // Re-trigger animations
-  setTimeout(() => {
-    projectListEl.querySelectorAll('.card-hover').forEach(card => {
-      card.classList.remove('opacity-0');
-    });
-  }, 100);
 }
 
 // Initialize projects when the DOM is loaded
@@ -187,6 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
+      // Don't do anything if the button is already active
+      if (button.classList.contains('active')) return;
+      
       // Remove active styles from all buttons
       filterButtons.forEach(btn => {
         btn.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'active');

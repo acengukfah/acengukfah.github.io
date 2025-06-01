@@ -186,6 +186,20 @@ document.addEventListener('DOMContentLoaded', function() {
     showNotification('CV download will start shortly!', 'fas fa-download');
   };
 
+  // Scroll to Projects and Filter Function
+  window.scrollToProjectsAndFilter = function(category) {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Find and click the corresponding filter button
+      const filterButton = document.querySelector(`.filter-button[data-category="${category}"]`);
+      if (filterButton) {
+        filterButton.click();
+      }
+    }
+  };
+
   // Initialize all UI components
   startTypingAnimation();
   initializeProfilePicture();

@@ -10,12 +10,46 @@ document.addEventListener('DOMContentLoaded', function() {
   // Mobile Menu Toggle
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = mobileMenuBtn ? mobileMenuBtn.querySelector('i') : null;
 
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+  function closeMobileMenu() {
+    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      mobileMenu.classList.add('hidden');
+      if (menuIcon) {
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+      }
+    }
+  }
+
+  function toggleMobileMenu() {
+    if (mobileMenu) {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      if (menuIcon) {
+        if (isHidden) {
+          menuIcon.classList.remove('fa-times');
+          menuIcon.classList.add('fa-bars');
+        } else {
+          menuIcon.classList.remove('fa-bars');
+          menuIcon.classList.add('fa-times');
+        }
+      }
+    }
+  }
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
     });
   }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu && !mobileMenu.contains(e.target) && mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
 
   // Scroll Progress Indicator
   const scrollIndicator = document.getElementById('scrollIndicator');
@@ -50,15 +84,15 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const target = document.querySelector(targetId);
       if (target) {
         target.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
-        
-        // Close mobile menu if open
-        mobileMenu.classList.add('hidden');
+        closeMobileMenu();
       }
     });
   });

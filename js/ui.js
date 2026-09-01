@@ -239,6 +239,13 @@ document.addEventListener('DOMContentLoaded', function() {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
+      // Honeypot check: If bot filled hidden field, drop silently
+      if (this._hp_company && this._hp_company.value.trim() !== '') {
+        showNotification('Message sent!', 'fas fa-paper-plane');
+        this.reset();
+        return;
+      }
+
       const submitBtn = this.querySelector('button[type="submit"]');
       const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '<i class="fas fa-paper-plane mr-2"></i> SEND MESSAGE';
 
@@ -250,7 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const payload = {
         name: this.name ? this.name.value.trim() : '',
         email: this.email ? this.email.value.trim() : '',
-        message: this.message ? this.message.value.trim() : ''
+        message: this.message ? this.message.value.trim() : '',
+        _hp: this._hp_company ? this._hp_company.value.trim() : ''
       };
 
       fetch(GMAIL_SCRIPT_URL, {

@@ -247,19 +247,19 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> SENDING...';
       }
 
-      const formData = new FormData(this);
-      const params = new URLSearchParams();
-      for (const [key, value] of formData.entries()) {
-        params.append(key, value);
-      }
+      const payload = {
+        name: this.name ? this.name.value.trim() : '',
+        email: this.email ? this.email.value.trim() : '',
+        message: this.message ? this.message.value.trim() : ''
+      };
 
       fetch(GMAIL_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'text/plain;charset=utf-8'
         },
-        body: params.toString()
+        body: JSON.stringify(payload)
       })
       .then(() => {
         showNotification('Message sent directly to Gmail! I\'ll reply soon.', 'fas fa-paper-plane');

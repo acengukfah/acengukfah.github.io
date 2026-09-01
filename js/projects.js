@@ -1,5 +1,19 @@
 // Project Data
 const projectsData = [
+  {
+    title: "Forever-More Digital Invitations",
+    image: "images/forever-more.webp",
+    categories: ["fullstack"],
+    techStack: ["JavaScript", "Supabase", "Swiper.js", "Cloudinary", "Vercel"],
+    github: null,
+    liveDemo: "https://eugenia-silvester.vercel.app/",
+    secondaryLink: {
+      url: "https://forevermore.vercel.app/",
+      label: "Platform",
+      icon: "fas fa-heart"
+    },
+    description: "Interactive digital wedding invitation platform with real-time RSVP and guestbook."
+  },
   // {
   //   title: "iDeviceStore Jogja",
   //   image: "images/idevicestore-jogja.jpg",
@@ -126,7 +140,7 @@ function createProjectCard(project, index) {
   ).join('');
 
   const linksHtml = `
-    <div class="flex gap-3 mt-4">
+    <div class="flex flex-wrap gap-3 mt-4">
       ${project.github ? `
         <a href="${project.github}" target="_blank" rel="noopener noreferrer" 
            class="flex items-center gap-1 px-3 py-1 bg-gray-800 text-white rounded-lg text-sm hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-1">
@@ -139,6 +153,13 @@ function createProjectCard(project, index) {
            class="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
           <i class="fas fa-external-link-alt"></i>
           <span>Live Demo</span>
+        </a>
+      ` : ''}
+      ${project.secondaryLink ? `
+        <a href="${project.secondaryLink.url}" target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg text-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+          <i class="${project.secondaryLink.icon || 'fas fa-globe'}"></i>
+          <span>${project.secondaryLink.label || 'Platform'}</span>
         </a>
       ` : ''}
     </div>

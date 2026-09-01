@@ -65,19 +65,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Typing Animation
   function startTypingAnimation() {
-    const titleText = "Agung Fitrah Ramadhana Ukfah";
+    const subtitleText = "Full-Stack Developer & Software Engineer";
     const titleElement = document.querySelector('.typing-animation');
+    if (!titleElement) return;
+    
     let index = 0;
+    titleElement.textContent = "";
 
-    function typeTitle() {
-      if (titleElement && index < titleText.length) {
-        titleElement.textContent = titleText.slice(0, index + 1);
+    function typeSubtitle() {
+      if (index < subtitleText.length) {
+        titleElement.textContent = subtitleText.slice(0, index + 1);
         index++;
-        setTimeout(typeTitle, 100);
+        setTimeout(typeSubtitle, 60);
       }
     }
 
-    setTimeout(typeTitle, 1000);
+    setTimeout(typeSubtitle, 400);
   }
 
   // Profile Picture Toggle
@@ -86,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let hoverTimeout = null;
     const profileImage = document.getElementById('profileImage');
     const statusIndicator = document.getElementById('statusIndicator');
+    const statusBadge = document.getElementById('statusBadge');
     const profileLoading = document.getElementById('profileLoading');
 
     const offlineImageUrl = 'images/profile-offline.png';
@@ -94,13 +98,29 @@ document.addEventListener('DOMContentLoaded', function() {
     function setProfileState(online) {
       isOnline = online;
       localStorage.setItem('profileOnline', online);
+      const statusText = statusBadge ? statusBadge.querySelector('span:last-child') : null;
+      
       if (isOnline) {
-        statusIndicator.classList.remove('bg-gray-400');
-        statusIndicator.classList.add('bg-green-500');
+        if (statusIndicator) {
+          statusIndicator.classList.remove('bg-gray-400');
+          statusIndicator.classList.add('bg-black');
+        }
+        if (statusBadge) {
+          statusBadge.classList.remove('bg-gray-300');
+          statusBadge.classList.add('bg-neo-lime');
+        }
+        if (statusText) statusText.textContent = 'AVAILABLE FOR WORK';
         profileImage.src = onlineImageUrl;
       } else {
-        statusIndicator.classList.remove('bg-green-500');
-        statusIndicator.classList.add('bg-gray-400');
+        if (statusIndicator) {
+          statusIndicator.classList.remove('bg-black');
+          statusIndicator.classList.add('bg-gray-400');
+        }
+        if (statusBadge) {
+          statusBadge.classList.remove('bg-neo-lime');
+          statusBadge.classList.add('bg-gray-300');
+        }
+        if (statusText) statusText.textContent = 'OFFLINE';
         profileImage.src = offlineImageUrl;
       }
     }
@@ -113,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hoverTimeout = setTimeout(() => {
           setProfileState(!isOnline);
           profileLoading.classList.remove('active');
-        }, 1500);
+        }, 1200);
       });
 
       profileImage.addEventListener('mouseleave', () => {
@@ -135,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
           setProfileState(!isOnline);
           profileLoading.classList.remove('active');
           profileImage.classList.remove('clicking');
-        }, 1500);
+        }, 800);
       });
     }
   }

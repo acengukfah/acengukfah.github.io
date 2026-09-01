@@ -231,31 +231,49 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
   }
 
-  // Contact Form Submission
+  // Contact Form Submission (Direct to Gmail via Google Apps Script)
   const contactForm = document.getElementById('contactForm');
+  const GMAIL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8rBvPeV3t6NbbgqMk7toYP616wZjuzDh1rKmxKvp1gkUnikCihxaP4dEUI7ytFnlK/exec';
+
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const formData = new FormData(this);
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '<i class="fas fa-paper-plane mr-2"></i> SEND MESSAGE';
 
-      fetch('https://formspree.io/f/mdkgqaeb', {
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> SENDING...';
+      }
+
+      const formData = new FormData(this);
+      const params = new URLSearchParams();
+      for (const [key, value] of formData.entries()) {
+        params.append(key, value);
+      }
+
+      fetch(GMAIL_SCRIPT_URL, {
         method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params.toString()
       })
-      .then(response => {
-        if (response.ok) {
-          showNotification('Message sent successfully! I\'ll get back to you soon.', 'fas fa-paper-plane');
-          this.reset();
-        } else {
-          response.json().then(data => {
-            showNotification(data.error || 'Oops! There was a problem submitting your form.', 'fas fa-exclamation-triangle');
-          });
+      .then(() => {
+        showNotification('Message sent directly to Gmail! I\'ll reply soon.', 'fas fa-paper-plane');
+        this.reset();
+      })
+      .catch((err) => {
+        console.error('Submission error:', err);
+        showNotification('Oops! There was a problem sending your message.', 'fas fa-exclamation-triangle');
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
         }
-      })
-      .catch(() => {
-        showNotification('Oops! There was a problem submitting your form.', 'fas fa-exclamation-triangle');
       });
     });
   }

@@ -97,24 +97,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Typing Animation
+  // Typing Animation with Multi-Title Loop
   function startTypingAnimation() {
-    const subtitleText = "Full-Stack Developer & Software Engineer";
+    const titles = [
+      "Full-Stack Developer & Software Engineer",
+      "AI / ML & Computer Vision Enthusiast",
+      "Python, Laravel & Cloud Backend Specialist"
+    ];
     const titleElement = document.querySelector('.typing-animation');
     if (!titleElement) return;
-    
-    let index = 0;
-    titleElement.textContent = "";
 
-    function typeSubtitle() {
-      if (index < subtitleText.length) {
-        titleElement.textContent = subtitleText.slice(0, index + 1);
-        index++;
-        setTimeout(typeSubtitle, 60);
+    let titleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeLoop() {
+      const currentTitle = titles[titleIndex];
+
+      if (isDeleting) {
+        titleElement.textContent = currentTitle.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        titleElement.textContent = currentTitle.substring(0, charIndex + 1);
+        charIndex++;
       }
+
+      let typeSpeed = isDeleting ? 25 : 50;
+
+      if (!isDeleting && charIndex === currentTitle.length) {
+        typeSpeed = 2200; // Pause when title is fully typed
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        titleIndex = (titleIndex + 1) % titles.length;
+        typeSpeed = 350; // Pause before typing next title
+      }
+
+      setTimeout(typeLoop, typeSpeed);
     }
 
-    setTimeout(typeSubtitle, 400);
+    setTimeout(typeLoop, 400);
   }
 
   // Profile Picture Toggle

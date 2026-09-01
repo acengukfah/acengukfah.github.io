@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Contact Form Submission (Direct to Gmail via Google Apps Script)
   const contactForm = document.getElementById('contactForm');
-  const GMAIL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8rBvPeV3t6NbbgqMk7toYP616wZjuzDh1rKmxKvp1gkUnikCihxaP4dEUI7ytFnlK/exec';
+  const GMAIL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxT2Rcl1ks-_svLK-RuftdMW8JLDgn2TuJRvD-iqLBliQ1VP84JRiTRRc1tS8S1jqSnpQ/exec';
 
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {

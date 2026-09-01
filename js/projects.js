@@ -136,29 +136,37 @@ const projectsData = [
 // Project rendering functions
 function createProjectCard(project, index) {
   const techStackHtml = project.techStack.map(tech => 
-    `<span class="px-2 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs rounded-full font-medium">${tech}</span>`
+    `<span class="neo-badge bg-[#FFFDF6] text-black text-[11px] font-mono py-0.5 px-2">${tech}</span>`
   ).join('');
 
+  const primaryCategory = project.categories[0] || 'project';
+  const categoryColors = {
+    'fullstack': 'bg-neo-yellow',
+    'backend': 'bg-neo-cyan',
+    'datascience': 'bg-neo-purple'
+  };
+  const categoryBadgeColor = categoryColors[primaryCategory] || 'bg-neo-yellow';
+
   const linksHtml = `
-    <div class="flex flex-wrap gap-3 mt-4">
+    <div class="flex flex-wrap gap-2.5 mt-4 pt-3 border-t-2 border-black">
       ${project.github ? `
         <a href="${project.github}" target="_blank" rel="noopener noreferrer" 
-           class="flex items-center gap-1 px-3 py-1 bg-gray-800 text-white rounded-lg text-sm hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-1">
-          <i class="fab fa-github"></i>
+           class="neo-btn bg-black text-white text-xs px-3 py-1.5 hover:bg-neutral-800">
+          <i class="fab fa-github mr-1.5"></i>
           <span>GitHub</span>
         </a>
       ` : ''}
       ${project.liveDemo ? `
         <a href="${project.liveDemo}" target="_blank" rel="noopener noreferrer"
-           class="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg text-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-          <i class="fas fa-external-link-alt"></i>
+           class="neo-btn bg-neo-cyan text-black text-xs px-3.5 py-1.5 hover:bg-cyan-300">
+          <i class="fas fa-external-link-alt mr-1.5"></i>
           <span>Live Demo</span>
         </a>
       ` : ''}
       ${project.secondaryLink ? `
         <a href="${project.secondaryLink.url}" target="_blank" rel="noopener noreferrer"
-           class="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg text-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-          <i class="${project.secondaryLink.icon || 'fas fa-globe'}"></i>
+           class="neo-btn bg-neo-pink text-black text-xs px-3 py-1.5 hover:bg-pink-300">
+          <i class="${project.secondaryLink.icon || 'fas fa-heart'} mr-1.5"></i>
           <span>${project.secondaryLink.label || 'Platform'}</span>
         </a>
       ` : ''}
@@ -166,20 +174,25 @@ function createProjectCard(project, index) {
   `;
 
   return `
-    <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden animate-fadeInUp" style="animation-delay: ${index * 100}ms">
-      <div class="relative group cursor-pointer" onclick="openImageModal('${project.image}', '${project.title}')">
-        <img src="${project.image}" alt="${project.title}" 
-             class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-      </div>
-      <div class="p-6">
-        <h3 class="text-xl font-bold text-slate-800 mb-2">${project.title}</h3>
-        <p class="text-gray-600 text-sm mb-3 leading-relaxed">${project.description}</p>
-        <div class="flex flex-wrap gap-2 mb-3">
+    <div class="neo-card bg-white border-[3px] border-black shadow-[6px_6px_0px_#000] p-4 flex flex-col justify-between animate-fadeInUp" style="animation-delay: ${index * 60}ms">
+      <div>
+        <div class="relative border-2 border-black overflow-hidden mb-4 bg-yellow-100 cursor-pointer group" onclick="openImageModal('${project.image}', '${project.title}')">
+          <img src="${project.image}" alt="${project.title}" 
+               class="w-full h-44 object-cover grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-200">
+          <div class="absolute top-2 left-2">
+            <span class="neo-badge ${categoryBadgeColor} text-black font-heading text-[10px] uppercase">${primaryCategory}</span>
+          </div>
+          <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <span class="neo-btn bg-white text-black text-xs px-2.5 py-1"><i class="fas fa-expand mr-1"></i> Preview</span>
+          </div>
+        </div>
+        <h3 class="font-heading font-extrabold text-xl text-black mb-2 leading-tight">${project.title}</h3>
+        <p class="text-gray-700 text-sm mb-3 leading-relaxed">${project.description}</p>
+        <div class="flex flex-wrap gap-1.5 mb-2">
           ${techStackHtml}
         </div>
-        ${linksHtml}
       </div>
+      ${linksHtml}
     </div>
   `;
 }
@@ -202,7 +215,7 @@ function renderProjects(category) {
   let projects = category === 'all' ? projectsData : projectsData.filter(project => project.categories.includes(category));
 
   if (projects.length === 0) {
-    projectListEl.innerHTML = '<div class="col-span-full text-center text-gray-500 py-8">No projects found in this category.</div>';
+    projectListEl.innerHTML = '<div class="col-span-full neo-box p-8 text-center text-black font-heading font-bold text-lg">No projects found in this category.</div>';
     return;
   }
 
@@ -249,13 +262,13 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Remove active styles from all buttons
       filterButtons.forEach(btn => {
-        btn.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'active');
-        btn.classList.add('bg-gray-200', 'text-gray-700');
+        btn.classList.remove('bg-neo-yellow', 'shadow-[5px_5px_0px_#000]', 'active');
+        btn.classList.add('bg-white', 'shadow-[3px_3px_0px_#000]');
       });
       
       // Add active styles to clicked button
-      button.classList.remove('bg-gray-200', 'text-gray-700');
-      button.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'active');
+      button.classList.remove('bg-white', 'shadow-[3px_3px_0px_#000]');
+      button.classList.add('bg-neo-yellow', 'shadow-[5px_5px_0px_#000]', 'active');
 
       // Render projects for selected category
       renderProjects(button.getAttribute('data-category'));

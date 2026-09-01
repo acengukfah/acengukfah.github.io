@@ -18,8 +18,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--neo-bg);
-  overflow-x: hidden;
-  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -28,8 +27,7 @@ body {
   background-color: var(--neo-bg);
   background-image: radial-gradient(#000000 1.2px, transparent 1.2px);
   background-size: 24px 24px;
-  overflow-x: hidden;
-  max-width: 100%;
+  overflow-x: clip;
   width: 100%;
 }
 
